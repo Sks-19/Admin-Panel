@@ -1,24 +1,273 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import ReactPaginate from 'react-paginate';
+import EditableRow from './EditableRow';
+import './users-entry.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import { BiEdit } from 'react-icons/bi';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { GrPrevious, GrNext } from 'react-icons/gr';
+
+const url = `https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json`;
 
 function App() {
+  /*API Call*/
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get(url).then(response => {
+      setData(response.data);
+    });
+  }, []);
+
+
+  /*Editable Row*/
+  const [editUserId, setEditUserId] = useState(null);
+  const [editFormData, setEditFormData] = useState({
+    name: "",
+    email: "",
+    role: "",
+  });
+
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...editFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setEditFormData(newFormData);
+  }
+
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+
+    const editedUser = {
+      id: editUserId,
+      name: editFormData.name,
+      email: editFormData.email,
+      role: editFormData.role
+    }
+
+    const newUsers = [...data]
+
+    const index = data.findIndex((user) => user.id === editUserId);
+
+    newUsers[index] = editedUser;
+
+    setData(newUsers);
+    setEditUserId(null);
+
+  }
+  const handleEditClick = (event, user) => {
+    event.preventDefault();
+    setEditUserId(user.id);
+
+    const formValues = {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    }
+
+    setEditFormData(formValues);
+  };
+
+  /*Delete Row*/
+
+  const handleDeleteClick = (userId) => {
+    const newData = [...data];
+
+    const index = data.findIndex((user) => user.id === userId);
+
+    newData.splice(index, 1);
+
+    setData(newData);
+  }
+
+
+  /*To Select all rows*/
+  var currentPageUser = [];
+
+  const handleChange = (e) => {
+    const { name, checked } = e.target;
+
+    if (name === "allSelect") {
+      let tempUser = data.map(user => {
+        return { ...user, isChecked: false }
+      });
+      let checkedData = tempUser.map(user => {
+        for (let i = pageVisited + 1; i < pageVisited + usersPerPage + 1; i++) {
+          if (Number(user.id) === i) {
+            return { ...user, isChecked: checked };
+          }
+        }
+        return user;
+      });
+      setData(checkedData);
+    } else {
+      let checkedData = data.map(user => user.name === name ? { ...user, isChecked: checked } : user
+      );
+
+      setData(checkedData);
+    }
+  };
+
+  /*To Delete All Selected Row*/
+  const allDelete = async () => {
+
+    const newDatas = [...data];
+
+    console.log("data :", newDatas);
+
+    const toDelete = newDatas.filter((val) => {
+      if (val.isChecked === false) {
+        console.log(val);
+        return val;
+      }
+    });
+    console.log("Deleted", toDelete);
+    setData(toDelete);
+
+  }
+
+  /*Pagination and Search Elements*/
+  const [currentPage, setCurrentPage] = useState(0);
+  const [searchTearm, setSearchTerm] = useState("");
+
+  const usersPerPage = 10;
+  const pageVisited = currentPage * usersPerPage;
+
+  var pageCount = Math.ceil(data.length / usersPerPage);;
+  var count = 0;
+
+  const displayUsers = data.filter((val) => {
+    if (searchTearm === "") {
+      return val;
+    }
+    else if (val.name.toLowerCase().includes(searchTearm.toLowerCase())
+      || val.email.toLowerCase().includes(searchTearm.toLowerCase())
+      || val.role.toLowerCase().includes(searchTearm.toLowerCase())) {
+      count++;
+      pageCount = Math.ceil(count / usersPerPage);
+      return val;
+    }
+  })
+    .slice(pageVisited, pageVisited + usersPerPage)
+    .map((user) => {
+      currentPageUser.push(user);
+      return (
+        <>
+          {editUserId === user.id ? (
+            <EditableRow
+              editFormData={editFormData}
+              handleEditFormChange={handleEditFormChange}
+            />
+          ) : (
+            <>
+              <tr id='tRow'>
+                <td>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value={user.id}
+                    onChange={handleChange}
+                    checked={user?.isChecked || false}
+                    name={user.name}
+                  />
+                </td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+                <td>
+                  <BiEdit
+                    className='iconEdit'
+                    type="button"
+                    onClick={(event) => handleEditClick(event, user)}
+                  />
+                  <AiOutlineDelete
+                    className='iconDelete'
+                    type="button"
+                    onClick={() => handleDeleteClick(user.id)}
+                  />
+                </td>
+              </tr>
+            </>
+          )
+          }
+        </>)
+    });
+
+  const changePage = ({ selected }) => {
+    setCurrentPage(selected);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="container">
+        <div className="justify-content-center">
+          <div className="input-group mb-3 w-100 p-3">
+            <input
+              id="myInput"
+              type="text"
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
+              className="form-control input-text"
+              placeholder="Search by name, email or role."
+            />
+          </div>
+        </div>
+        <form onSubmit={handleEditFormSubmit}>
+          <table id="myTable" className="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="check_all"
+                    name="allSelect"
+                    onChange={handleChange}
+                  />
+                </th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {displayUsers}
+            </tbody>
+          </table>
+        </form>
+        <div className='row'>
+          <div className='col col-lg-4 col-m-4 col-sm-4'>
+            <button
+              className='btn btn-danger btnDelete'
+              onClick={allDelete}
+            >
+              Delete Selected
+            </button>
+          </div>
+          <div className='col col-lg-8 col-m-8 col-sm-8'>
+            <ReactPaginate
+              previousLabel={<GrPrevious />}
+              nextLabel={<GrNext />}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"paginationBttns"}
+              previousLinkClassName={"previousBttn"}
+              nextLinkClassName={"nextBttn"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+            />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
