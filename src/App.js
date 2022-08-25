@@ -205,7 +205,7 @@ function App() {
   return (
     <>
       <div className="container">
-        <div className="justify-content-center">
+        <div className="d-flex justify-content-center">
           <div className="input-group mb-4 w-100 pt-4">
             <input
               id="myInput"
@@ -221,7 +221,7 @@ function App() {
         <form onSubmit={handleEditFormSubmit}>
           <div className="form-group">
             <table id="myTable" className="table table-dark table-striped table-hover">
-              <thead className='thead-dark'>
+              <thead className='bg-warning'>
                 <tr>
                   <th scope="col">
                     <input
@@ -245,7 +245,7 @@ function App() {
           </div>
         </form>
         <div className='row'>
-          <div className='col-4 col-lg-4 col-m-4 col-sm-4'>
+          <div className='col-12 col-lg-4 col-m-4 col-sm-12'>
             <button
               className='btn btn-danger btnDelete'
               onClick={allDelete}
@@ -253,7 +253,7 @@ function App() {
               Delete Selected
             </button>
           </div>
-          <div className='col-8 col-lg-8 col-m-8 col-sm-8'>
+          <div className='col-12 col-lg-8 col-m-8 col-sm-12'>
             <ReactPaginate
               previousLabel={<GrPrevious />}
               nextLabel={<GrNext />}

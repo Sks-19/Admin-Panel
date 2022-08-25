@@ -1,3 +1,7 @@
+body {
+    background-color: black;
+}
+
 .iconEdit {
     margin: 0% 10% 0% 20%;
 }
@@ -24,11 +28,11 @@
 }
 
 .btnDelete {
-    margin-top: 10%;
+    margin-top: 2%;
 }
 
 .paginationBttns {
-    margin: 7%;
+    margin: 5%;
     width: 70%;
     height: 40px;
     list-style: none;
