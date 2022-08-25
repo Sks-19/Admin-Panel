@@ -99,6 +99,7 @@ function App() {
       });
       let checkedData = tempUser.map(user => {
         for (let i = pageVisited + 1; i < pageVisited + usersPerPage + 1; i++) {
+
           if (Number(user.id) === i) {
             return { ...user, isChecked: checked };
           }
@@ -119,17 +120,15 @@ function App() {
 
     const newDatas = [...data];
 
-    console.log("data :", newDatas);
-
     const toDelete = newDatas.filter((val) => {
-      if (val.isChecked === false) {
-        console.log(val);
+
+      let res = val.hasOwnProperty('isChecked');
+
+      if (res === false || val.isChecked === false) {
         return val;
       }
     });
-    console.log("Deleted", toDelete);
     setData(toDelete);
-
   }
 
   /*Pagination and Search Elements*/
@@ -167,7 +166,7 @@ function App() {
           ) : (
             <>
               <tr id='tRow'>
-                <td>
+                <th scope='row'>
                   <input
                     className="form-check-input"
                     type="checkbox"
@@ -176,7 +175,7 @@ function App() {
                     checked={user?.isChecked || false}
                     name={user.name}
                   />
-                </td>
+                </th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
@@ -207,7 +206,7 @@ function App() {
     <>
       <div className="container">
         <div className="justify-content-center">
-          <div className="input-group mb-3 w-100 p-3">
+          <div className="input-group mb-4 w-100 pt-4">
             <input
               id="myInput"
               type="text"
@@ -220,31 +219,33 @@ function App() {
           </div>
         </div>
         <form onSubmit={handleEditFormSubmit}>
-          <table id="myTable" className="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id="check_all"
-                    name="allSelect"
-                    onChange={handleChange}
-                  />
-                </th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayUsers}
-            </tbody>
-          </table>
+          <div className="form-group">
+            <table id="myTable" className="table table-dark table-striped table-hover">
+              <thead className='thead-dark'>
+                <tr>
+                  <th scope="col">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="check_all"
+                      name="allSelect"
+                      onChange={handleChange}
+                    />
+                  </th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {displayUsers}
+              </tbody>
+            </table>
+          </div>
         </form>
         <div className='row'>
-          <div className='col col-lg-4 col-m-4 col-sm-4'>
+          <div className='col-4 col-lg-4 col-m-4 col-sm-4'>
             <button
               className='btn btn-danger btnDelete'
               onClick={allDelete}
@@ -252,7 +253,7 @@ function App() {
               Delete Selected
             </button>
           </div>
-          <div className='col col-lg-8 col-m-8 col-sm-8'>
+          <div className='col-8 col-lg-8 col-m-8 col-sm-8'>
             <ReactPaginate
               previousLabel={<GrPrevious />}
               nextLabel={<GrNext />}

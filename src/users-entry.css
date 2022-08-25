@@ -24,11 +24,11 @@
 }
 
 .btnDelete {
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 .paginationBttns {
-    margin: 5%;
+    margin: 7%;
     width: 70%;
     height: 40px;
     list-style: none;
@@ -57,8 +57,4 @@
 
 input[type="checkbox"]:checked {
     background-color: pink;
-}
-
-.selected-row {
-    background-color: #2b2eff;
 }
