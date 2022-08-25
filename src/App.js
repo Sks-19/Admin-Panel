@@ -222,7 +222,7 @@ function App() {
             </div>
           </div>
           <div className="form-group" id='dataTable'>
-            <table id="myTable" className="table table-hover">
+            <table id="myTable" className="table table-hover table-dark">
               <thead className='bg-warning'>
                 <tr>
                   <th scope="col">
@@ -247,7 +247,7 @@ function App() {
           </div>
         </form>
         <div className='row'>
-          <div className='col-5 col-lg-4 col-m-4 col-sm-5'>
+          <div className='col-6 col-lg-4 col-m-4 col-sm-5'>
             <button
               className='btn btn-danger btnDelete'
               onClick={allDelete}
@@ -255,7 +255,7 @@ function App() {
               Delete Selected
             </button>
           </div>
-          <div className='col-7 col-lg-8 col-m-8 col-sm-7'>
+          <div className='col-4 col-lg-8 col-m-8 col-sm-7'>
             <ReactPaginate
               previousLabel={<GrPrevious />}
               nextLabel={<GrNext />}

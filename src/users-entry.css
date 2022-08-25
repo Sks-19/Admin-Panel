@@ -4,6 +4,7 @@ body {
 
 .Title {
     text-align: center;
+    color: #2b2eff;
 }
 
 .iconEdit {
@@ -36,8 +37,8 @@ body {
 }
 
 .paginationBttns {
+    color: #fff;
     margin-top: 3%;
-    /* float: right; */
     width: 80%;
     height: 40px;
     list-style: none;
@@ -76,8 +77,4 @@ input[type="checkbox"]:checked {
 
 #myInput::placeholder {
     color: bisque;
-}
-
-#dataTable {
-    background-color: #000000;
 }
