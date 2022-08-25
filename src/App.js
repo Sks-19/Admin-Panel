@@ -216,7 +216,7 @@ function App() {
                 onChange={(event) => {
                   setSearchTerm(event.target.value);
                 }}
-                className="form-control input-text"
+                className="form-control input-text-light"
                 placeholder="Search by name, email or role."
               />
             </div>

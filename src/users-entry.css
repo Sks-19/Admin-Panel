@@ -2,6 +2,13 @@ body {
     background-color: black;
 }
 
+form,
+input,
+label,
+p {
+    color: white !important;
+}
+
 .Title {
     text-align: center;
     color: #fff;
@@ -44,6 +51,14 @@ body {
     list-style: none;
     display: flex;
     justify-content: center;
+}
+
+.previousBttn {
+    color: #fff;
+}
+
+.nextBttn {
+    color: #fff;
 }
 
 .paginationBttns a {
