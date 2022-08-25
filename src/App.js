@@ -205,23 +205,24 @@ function App() {
   return (
     <>
       <div className="container">
+        <h1 className='Title mt-4'>Admin Panel</h1>
         <form onSubmit={handleEditFormSubmit}>
-          <div className="form-group">
-            <div className="d-flex justify-content-center">
-              <div className="d-sm-flex input-group mb-4 w-100 pt-4">
-                <input
-                  id="myInput"
-                  type="text"
-                  onChange={(event) => {
-                    setSearchTerm(event.target.value);
-                  }}
-                  className="form-control input-text"
-                  placeholder="Search by name, email or role."
-                />
-              </div>
-            </div>
 
-            <table id="myTable" className="table table-dark table-striped table-hover">
+          <div className="d-flex justify-content-center">
+            <div className="d-sm-flex input-group mb-4 w-100 pt-4">
+              <input
+                id="myInput"
+                type="text"
+                onChange={(event) => {
+                  setSearchTerm(event.target.value);
+                }}
+                className="form-control input-text"
+                placeholder="Search by name, email or role."
+              />
+            </div>
+          </div>
+          <div className="form-group" id='dataTable'>
+            <table id="myTable" className="table table-hover">
               <thead className='bg-warning'>
                 <tr>
                   <th scope="col">
@@ -246,7 +247,7 @@ function App() {
           </div>
         </form>
         <div className='row'>
-          <div className='col-4 col-lg-4 col-m-4 col-sm-4'>
+          <div className='col-5 col-lg-4 col-m-4 col-sm-5'>
             <button
               className='btn btn-danger btnDelete'
               onClick={allDelete}
@@ -254,7 +255,7 @@ function App() {
               Delete Selected
             </button>
           </div>
-          <div className='col-8 col-lg-8 col-m-8 col-sm-8'>
+          <div className='col-7 col-lg-8 col-m-8 col-sm-7'>
             <ReactPaginate
               previousLabel={<GrPrevious />}
               nextLabel={<GrNext />}

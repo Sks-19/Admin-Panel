@@ -2,8 +2,12 @@ body {
     background-color: black;
 }
 
+.Title {
+    text-align: center;
+}
+
 .iconEdit {
-    margin: 0% 10% 0% 20%;
+    margin: 0% 0% 0% 0%;
 }
 
 .iconDelete {
@@ -62,4 +66,18 @@ body {
 
 input[type="checkbox"]:checked {
     background-color: pink;
+}
+
+#myInput {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+#myInput::placeholder {
+    color: bisque;
+}
+
+#dataTable {
+    background-color: #000000;
 }
