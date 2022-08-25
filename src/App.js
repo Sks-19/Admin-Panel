@@ -222,6 +222,14 @@ function App() {
             </div>
           </div>
           <div className="form-group" id='dataTable'>
+            <div>
+              <button
+                className='btn btn-danger btnDelete mb-4'
+                onClick={allDelete}
+              >
+                Delete Selected
+              </button>
+            </div>
             <table id="myTable" className="table table-hover table-dark">
               <thead className='bg-warning'>
                 <tr>
@@ -247,27 +255,17 @@ function App() {
           </div>
         </form>
         <div className='row'>
-          <div className='col-6 col-lg-4 col-m-4 col-sm-5'>
-            <button
-              className='btn btn-danger btnDelete'
-              onClick={allDelete}
-            >
-              Delete Selected
-            </button>
-          </div>
-          <div className='col-4 col-lg-8 col-m-8 col-sm-7'>
-            <ReactPaginate
-              previousLabel={<GrPrevious />}
-              nextLabel={<GrNext />}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName={"paginationBttns"}
-              previousLinkClassName={"previousBttn"}
-              nextLinkClassName={"nextBttn"}
-              disabledClassName={"paginationDisabled"}
-              activeClassName={"paginationActive"}
-            />
-          </div>
+          <ReactPaginate
+            previousLabel={<GrPrevious />}
+            nextLabel={<GrNext />}
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
         </div>
       </div>
     </>
