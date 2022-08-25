@@ -204,9 +204,9 @@ function App() {
 
   return (
     <>
-      <div className="container">
-        <h1 className='Title mt-4'>Admin Panel</h1>
-        <form onSubmit={handleEditFormSubmit}>
+      <div className="container w-100">
+        <h1 className='Title pt-4'>Admin Panel</h1>
+        <form className='w-100' onSubmit={handleEditFormSubmit}>
 
           <div className="d-flex justify-content-center">
             <div className="d-sm-flex input-group mb-4 w-100 pt-4">
@@ -230,7 +230,7 @@ function App() {
                 Delete Selected
               </button>
             </div>
-            <table id="myTable" className="table table-hover table-dark">
+            <table id="myTable" className="table table-hover table-dark w-100">
               <thead className='bg-warning'>
                 <tr>
                   <th scope="col">
