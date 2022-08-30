@@ -93,3 +93,12 @@ input[type="checkbox"]:checked {
 #myInput::placeholder {
     color: bisque;
 }
+
+#myTable {
+    color: #fff;
+    background-color: black;
+}
+
+.selected {
+    background-color: gray;
+}

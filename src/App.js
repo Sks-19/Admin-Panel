@@ -40,7 +40,6 @@ function App() {
 
     setEditFormData(newFormData);
   }
-
   const handleEditFormSubmit = (event) => {
     event.preventDefault();
 
@@ -115,6 +114,18 @@ function App() {
     }
   };
 
+  // To Change Background of selected row
+  let table = document.getElementById("myTable");
+
+  const selectedRow = () => {
+    for (let i = 1; i < table.rows.length; i++) {
+      table.rows[i].onclick = function () {
+        this.classList.toggle("selected");
+      };
+    }
+  }
+
+
   /*To Delete All Selected Row*/
   const allDelete = async () => {
 
@@ -171,6 +182,7 @@ function App() {
                     className="form-check-input"
                     type="checkbox"
                     value={user.id}
+                    onClick={selectedRow}
                     onChange={handleChange}
                     checked={user?.isChecked || false}
                     name={user.name}
@@ -230,7 +242,7 @@ function App() {
                 Delete Selected
               </button>
             </div>
-            <table id="myTable" className="table table-hover table-dark w-100">
+            <table id="myTable" className="table table-hover w-100">
               <thead className='bg-warning'>
                 <tr>
                   <th scope="col">
