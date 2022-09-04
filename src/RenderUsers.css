@@ -1,0 +1,31 @@
+#myInput {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+#myInput::placeholder {
+    color: bisque;
+}
+
+#myTable {
+    color: #fff;
+    width: 100%;
+    height: 55vh;
+    background-color: black;
+}
+
+@media only screen and (max-width: 480px) {
+    #myTable {
+        background-color:black;
+        color: #fff;
+        width: 100%;
+        height: 80vh;
+    }
+
+    #myTable td {
+        padding-left: 2%;
+        width: 50%;
+    }
+    
+}

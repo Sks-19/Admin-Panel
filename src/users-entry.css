@@ -15,7 +15,7 @@ p {
 }
 
 .iconEdit {
-    margin: 0% 0% 0% 0%;
+    margin: 0% 0% 0% 15%;
 }
 
 .iconDelete {
@@ -82,21 +82,6 @@ p {
 
 input[type="checkbox"]:checked {
     background-color: pink;
-}
-
-#myInput {
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-}
-
-#myInput::placeholder {
-    color: bisque;
-}
-
-#myTable {
-    color: #fff;
-    background-color: black;
 }
 
 .selected {
