@@ -23,7 +23,7 @@ const RenderUsers = ({ data, setData, handleEditFormSubmit, setSearchTerm, handl
       <div className="container">
         <h1 className='Title pt-4'>Admin Panel</h1>
         <form className='w-100' onSubmit={handleEditFormSubmit}>
-
+        <div className="form-group" id='dataTable'>
           <div className="d-flex justify-content-center">
             <div className="d-sm-flex input-group mb-4 w-100 pt-4">
               <input
@@ -37,7 +37,6 @@ const RenderUsers = ({ data, setData, handleEditFormSubmit, setSearchTerm, handl
               />
             </div>
           </div>
-          <div className="form-group" id='dataTable'>
             <div>
               <button
                 className='btn btn-danger btnDelete mb-4'
@@ -46,8 +45,8 @@ const RenderUsers = ({ data, setData, handleEditFormSubmit, setSearchTerm, handl
                 Delete Selected
               </button>
             </div>
-            <table id="myTable" className="TableRes">
-              <thead className='bg-warning'>
+            <table id="myTable" className="table table-hover">
+              <thead className='bg-secondary'>
                 <tr>
                   <th scope="col">
                     <input
@@ -58,7 +57,7 @@ const RenderUsers = ({ data, setData, handleEditFormSubmit, setSearchTerm, handl
                       onChange={handleChange}
                     />
                   </th>
-                  <th className="p-2" scope="col">Name</th>
+                  <th scope="col">Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Role</th>
                   <th scope="col">Actions</th>
